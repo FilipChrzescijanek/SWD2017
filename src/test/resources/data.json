@@ -1,0 +1,70 @@
+[
+  {
+    "name": "Texas",
+    "toppings": [
+      "cheese",
+      "salami"
+    ],
+    "price": 15.00,
+    "diameter": 30,
+    "pizzeriaName": "Da Grasso",
+    "deliveryTime": 15
+  },
+  {
+    "name": "Texas",
+    "toppings": [
+      "cheese",
+      "salami"
+    ],
+    "price": 20.00,
+    "diameter": 40,
+    "pizzeriaName": "Da Grasso",
+    "deliveryTime": 15
+  },
+  {
+    "name": "California",
+    "toppings": [
+      "cheese",
+      "ham"
+    ],
+    "price": 18.00,
+    "diameter": 30,
+    "pizzeriaName": "Da Grasso",
+    "deliveryTime": 15
+  },
+  {
+    "name": "Hawaii",
+    "toppings": [
+      "cheese",
+      "salami",
+      "pineapple"
+    ],
+    "price": 25.00,
+    "diameter": 40,
+    "pizzeriaName": "Da Grasso",
+    "deliveryTime": 15
+  },
+  {
+    "name": "California",
+    "toppings": [
+      "cheese",
+      "ham"
+    ],
+    "price": 17.00,
+    "diameter": 40,
+    "pizzeriaName": "Pizza Hut",
+    "deliveryTime": 30
+  },
+  {
+    "name": "Hawaii",
+    "toppings": [
+      "cheese",
+      "salami",
+      "pineapple"
+    ],
+    "price": 24.00,
+    "diameter": 40,
+    "pizzeriaName": "Pizza Hut",
+    "deliveryTime": 30
+  }
+]
