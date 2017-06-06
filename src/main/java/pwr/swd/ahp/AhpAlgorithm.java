@@ -18,11 +18,11 @@ public class AhpAlgorithm {
 		final List<Pizza> filtered = filter.filter(pizzas);
 		if (filtered.size() < 2) return filtered;
 		else {
-			final double[] s0 = processMatrix(preferenceMatrix);
-			final double[] s1 = processMatrix(getPriceMatrix(filtered));
-			final double[] s2 = processMatrix(getTimeMatrix(filtered));
-			final double[] s3 = processMatrix(getSizeMatrix(filtered));
-			final double[] s4 = processMatrix(getToppingsMatrix(filtered));
+			final double[] s0 = getPriorityVector(preferenceMatrix);
+			final double[] s1 = getPriorityVector(getPriceMatrix(filtered));
+			final double[] s2 = getPriorityVector(getTimeMatrix(filtered));
+			final double[] s3 = getPriorityVector(getSizeMatrix(filtered));
+			final double[] s4 = getPriorityVector(getToppingsMatrix(filtered));
 
 			final int n = filtered.size();
 			final double[] r = new double[n];

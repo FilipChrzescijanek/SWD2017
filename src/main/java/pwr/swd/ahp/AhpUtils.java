@@ -104,7 +104,7 @@ public class AhpUtils {
 		return matrix;
 	}
 
-	public static double[] processMatrix(final double[][] matrix) {
+	public static double[] getPriorityVector(final double[][] matrix) {
 		final int n = matrix.length;
 
 		final double[] c = new double[n];
@@ -159,7 +159,10 @@ public class AhpUtils {
 
 	/*
 	 *  In accordance with:
-	 *	https://arxiv.org/pdf/1402.1976.pdf
+	 *  Saaty, Thomas L., and Luis G. Vargas. 
+	 *  "Comparison of eigenvalue, logarithmic least squares and least squares methods in estimating ratios." 
+	 *  Mathematical modelling 5.5 (1984): 309-324.
+	 *  http://www.sciencedirect.com/science/article/pii/0270025584900083
 	 */
 	private static double priority(final double[][] weights, final int index) {
 		double sum = 0.0;
