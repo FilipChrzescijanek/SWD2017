@@ -26,7 +26,7 @@ public class PizzasFilter {
 				.filter(this::checkDeliveryTime)
 				.filter(this::checkWantedToppings)
 				.filter(this::checkUnwantedToppings)
-				.limit(10)
+				.limit(39)
 				.collect(Collectors.toList());
 	}
 

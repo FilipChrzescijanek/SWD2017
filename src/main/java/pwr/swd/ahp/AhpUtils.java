@@ -7,7 +7,12 @@ import static pwr.swd.ahp.PreferencePair.*;
 
 public class AhpUtils {
 
-	public static final double[] RI_VALUES = new double[] {0.58, 0.9, 1.12, 1.24, 1.32, 1.41, 1.45, 1.49};
+	public static final double[] RI_VALUES = new double[] {
+			0.5247, 0.8816, 1.1086, 1.2479, 1.3417, 1.4057, 1.4499,                             // n = 3..9
+			1.4854, 1.5140, 1.5365, 1.5551, 1.5713, 1.5838, 1.5978, 1.6086, 1.6181, 1.6265,     // n = 10..19
+			1.6341, 1.6409, 1.6470, 1.6526, 1.6577, 1.6624, 1.6667, 1.6706, 1.6743, 1.6777,     // n = 20..29
+			1.6809, 1.6839, 1.6867, 1.6893, 1.6917, 1.6940, 1.6962, 1.6982, 1.7002, 1.7020      // n = 30..39
+	};
 
 	public static double[][] getPreferenceMatrix(final EnumMap<PreferencePair, Double> preferences) {
 		final double priceToTime = preferences.get(PRICE_TO_TIME);
@@ -17,10 +22,10 @@ public class AhpUtils {
 		final double timeToToppings = preferences.get(TIME_TO_TOPPINGS);
 		final double sizeToToppings = preferences.get(SIZE_TO_TOPPINGS);
 		return new double[][] {
-			new double[] {1.0,                      priceToTime,        priceToSize,            priceToToppings },
-			new double[] {1.0 / priceToTime,        1.0,                timeToSize,             timeToToppings  },
-			new double[] {1.0 / priceToSize,        1.0 / timeToSize,   1.0,                    sizeToToppings  },
-			new double[] {1.0 / priceToToppings,    1.0 / timeToToppings, 1.0 / sizeToToppings, 1.0             }
+			new double[] {1.0,                      priceToTime,            priceToSize,            priceToToppings },
+			new double[] {1.0 / priceToTime,        1.0,                    timeToSize,             timeToToppings  },
+			new double[] {1.0 / priceToSize,        1.0 / timeToSize,       1.0,                    sizeToToppings  },
+			new double[] {1.0 / priceToToppings,    1.0 / timeToToppings,   1.0 / sizeToToppings,   1.0             }
 		};
 	}
 
