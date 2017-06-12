@@ -3,15 +3,14 @@ package pwr.swd.ahp;
 import java.io.File;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.org.apache.xpath.internal.SourceTree;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -20,8 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
 import static pwr.swd.ahp.PreferencePair.*;
-import static pwr.swd.ahp.PreferencePair.SIZE_TO_TOPPINGS;
-import static pwr.swd.ahp.PreferencePair.TIME_TO_TOPPINGS;
 
 public class Controller {
 
@@ -67,31 +64,23 @@ public class Controller {
     @FXML
     private ChoiceBox<String> sizeToToppings;
 
-    private EnumMap<PreferencePair, Double> preferences;
-    private PizzasFilter filter;
-    private List<Pizza> pizzas;
+    private final ObservableList<Pizza> pizzas = FXCollections.observableArrayList();
 
     @FXML
     void load(final ActionEvent event) throws Exception {
-        FileChooser fileChooser = new FileChooser();
+        final FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-        File selectedFile = fileChooser.showOpenDialog(null);
+        final File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
-            pizzas = new ObjectMapper().readValue(selectedFile, new TypeReference<List<Pizza>>() {});
+            final List<Pizza> data = new ObjectMapper().readValue(selectedFile, new TypeReference<List<Pizza>>() {});
+            pizzas.setAll(data);
+            rankView.getItems().setAll(pizzas.stream().map(Pizza::toString).collect(Collectors.toList()));
         }
-        rankView.getItems().clear();
-        ObservableList<String>readPizzas = FXCollections.<String>observableArrayList();
-        for (int i = 0; i < pizzas.size(); i++) {
-            readPizzas.add(pizzas.get(i).toString());
-        }
-
-        rankView.getItems().addAll(readPizzas);
     }
 
     @FXML
     void rank(final ActionEvent event) {
-        rankView.getItems().clear();
-        preferences = new EnumMap<>(PreferencePair.class);
+        final EnumMap<PreferencePair, Double> preferences = new EnumMap<>(PreferencePair.class);
         preferences.put(PRICE_TO_TIME, parse(priceToTime.getValue()));
         preferences.put(PRICE_TO_SIZE, parse(priceToSize.getValue()));
         preferences.put(PRICE_TO_TOPPINGS, parse(priceToToppings.getValue()));
@@ -99,23 +88,21 @@ public class Controller {
         preferences.put(TIME_TO_TOPPINGS, parse(timeToToppings.getValue()));
         preferences.put(SIZE_TO_TOPPINGS, parse(sizeToToppings.getValue()));
 
-        List<String> wanted = wantedToppings.getText().isEmpty() ? Collections.emptyList() : Arrays.asList(wantedToppings.getText().split("\\s*,\\s*"));
-        List<String> unwanted = unwantedToppings.getText().isEmpty() ? Collections.emptyList() : Arrays.asList(unwantedToppings.getText().split("\\s*,\\s*"));
+        final List<String> wanted = wantedToppings.getText().isEmpty() ?
+                Collections.emptyList() : Arrays.asList(wantedToppings.getText().split("\\s*,\\s*"));
+        final List<String> unwanted = unwantedToppings.getText().isEmpty() ?
+                Collections.emptyList() : Arrays.asList(unwantedToppings.getText().split("\\s*,\\s*"));
 
-        filter = new PizzasFilter(Double.parseDouble(maxPrice.getText()), Integer.parseInt(maxDeliveryTime.getText()), wanted, unwanted);
+        final PizzasFilter filter = new PizzasFilter(Double.parseDouble(maxPrice.getText()),
+                                                     Integer.parseInt(maxDeliveryTime.getText()), wanted, unwanted);
 
         final List<Pizza> ranked = new AhpAlgorithm(preferences).rank(pizzas, filter);
-
-        ObservableList<String>rankedPizzas = FXCollections.<String>observableArrayList();
-        for (int i = 0; i < ranked.size(); i++) {
-            rankedPizzas.add(ranked.get(i).toString());
-        }
-        rankView.getItems().addAll(rankedPizzas);
+        rankView.getItems().setAll(ranked.stream().map(Pizza::toString).collect(Collectors.toList()));
     }
 
-    double parse(String ratio) {
+    private double parse(final String ratio) {
         if (ratio.contains("/")) {
-            String[] rat = ratio.split("/");
+            final String[] rat = ratio.split("/");
             return Double.parseDouble(rat[0]) / Double.parseDouble(rat[1]);
         } else {
             return Double.parseDouble(ratio);
@@ -128,7 +115,7 @@ public class Controller {
         initializeChoicesList();
         setChoices();
 
-        rankButton.disableProperty().bind(Bindings.isEmpty(rankView.getItems()));
+        rankButton.disableProperty().bind(Bindings.isEmpty(pizzas));
     }
 
     private void assertInitiated() {
