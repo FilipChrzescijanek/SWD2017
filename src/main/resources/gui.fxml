@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pwr.swd.ahp.Controller">
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#load" prefWidth="100.0" text="Load data" />
+            <Button fx:id="rankButton" mnemonicParsing="false" onAction="#rank" prefWidth="100.0" text="Rank" />
+         </children>
+      </HBox>
+   </bottom>
+   <right>
+      <ListView fx:id="rankView" prefHeight="500.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets right="15.0" top="15.0" />
+         </BorderPane.margin>
+      </ListView>
+   </right>
+   <left>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Price to Time:" />
+            <Label text="Price to Size:" GridPane.columnIndex="2" />
+            <Label text="Price to Toppings:" GridPane.rowIndex="1" />
+            <Label text="Time to Size:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text="Time to Toppings:" GridPane.rowIndex="2" />
+            <Label text="Size to Toppings:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label text="Max price:" GridPane.rowIndex="3" />
+            <Label text="Max delivery time:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Label text="Wanted toppings:" GridPane.rowIndex="4" />
+            <Label text="Unwanted toppings:" GridPane.rowIndex="5" />
+            <TextField fx:id="maxPrice" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="maxDeliveryTime" text="0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="wantedToppings" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="unwantedToppings" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </TextField>
+            <ChoiceBox fx:id="priceToTime" GridPane.columnIndex="1">
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </ChoiceBox>
+            <ChoiceBox fx:id="priceToToppings" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </ChoiceBox>
+            <ChoiceBox fx:id="timeToToppings" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </ChoiceBox>
+            <ChoiceBox fx:id="priceToSize" GridPane.columnIndex="3">
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </ChoiceBox>
+            <ChoiceBox fx:id="timeToSize" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </ChoiceBox>
+            <ChoiceBox fx:id="sizeToToppings" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="25.0" right="25.0" />
+               </GridPane.margin>
+            </ChoiceBox>
+         </children>
+      </GridPane>
+   </left>
+</BorderPane>
