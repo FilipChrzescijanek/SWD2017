@@ -22,7 +22,7 @@
       </HBox>
    </bottom>
    <right>
-      <ListView fx:id="rankView" prefHeight="500.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+      <ListView fx:id="rankView" prefHeight="500.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets right="15.0" top="15.0" />
          </BorderPane.margin>
